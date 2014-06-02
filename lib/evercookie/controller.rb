@@ -8,7 +8,8 @@ module Evercookie
     #
     def evercookie_get_value(key)
       if session[Evercookie.hash_name_for_saved].present?
-        session[Evercookie.hash_name_for_saved][key]
+        session[Evercookie.hash_name_for_saved][key] ||
+          session[Evercookie.hash_name_for_saved][key.to_s]
       else
         nil
       end
@@ -57,9 +58,10 @@ module Evercookie
     # Saves current evercookie value to session
     def save
       if data = session[Evercookie.hash_name_for_get]
-        if data[:key] && cookies[data[:key]]
+        key = data[:key] || data['key']
+        if key && cookies[key]
           session[Evercookie.hash_name_for_saved] =
-              { data[:key] => cookies[data[:key]] }
+              { key => cookies[key] }
         end
       end
       render nothing: true

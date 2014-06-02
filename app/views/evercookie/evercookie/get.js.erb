@@ -1,7 +1,7 @@
 (function(){
 	function getCookie(){
 		var ec = new <%= Evercookie.js_class %>();
-		ec.get('<%= @data[:key] -%>');
+		ec.get('<%= @data[:key] || @data['key'] -%>');
 	};
 	if(typeof jQuery != 'undefined') {
 		jQuery(document).ready(getCookie);

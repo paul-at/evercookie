@@ -1,7 +1,7 @@
 (function(){
 	function setCookie(){
 		var ec = new <%= Evercookie.js_class %>();
-		ec.set('<%= @data[:key] -%>', '<%= @data[:value] -%>')	
+		ec.set('<%= @data[:key] || @data['key'] -%>', '<%= @data[:value] || @data['value'] -%>')	
 	};
 	if(typeof jQuery != 'undefined') {
 		jQuery(document).ready(setCookie);
